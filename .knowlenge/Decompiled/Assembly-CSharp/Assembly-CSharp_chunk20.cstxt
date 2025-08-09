@@ -64,24 +64,24 @@ public class UILineRendererList : UIPrimitiveBase
 	[Tooltip("Points to draw lines between\n Can be improved using the Resolution Option")]
 	internal List<Vector2> m_points;
 
-	[SerializeField]
 	[Tooltip("Thickness of the line")]
+	[SerializeField]
 	internal float lineThickness = 2f;
 
 	[Tooltip("Use the relative bounds of the Rect Transform (0,0 -> 0,1) or screen space coordinates")]
 	[SerializeField]
 	internal bool relativeSize;
 
-	[SerializeField]
 	[Tooltip("Do the points identify a single line or split pairs of lines")]
+	[SerializeField]
 	internal bool lineList;
 
-	[SerializeField]
 	[Tooltip("Add end caps to each line\nMultiple caps when used with Line List")]
+	[SerializeField]
 	internal bool lineCaps;
 
-	[Tooltip("Resolution of the Bezier curve, different to line Resolution")]
 	[SerializeField]
+	[Tooltip("Resolution of the Bezier curve, different to line Resolution")]
 	internal int bezierSegmentsPerCurve = 10;
 
 	[Tooltip("The type of Join used between lines, Square/Mitre or Curved/Bevel")]
@@ -2590,10 +2590,10 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.Scripting;
 
-[DisallowMultipleComponent]
+[ImageEffectAllowedInSceneView]
 [RequireComponent(typeof(Camera))]
 [AddComponentMenu("Rendering/Post-process Layer", 1000)]
-[ImageEffectAllowedInSceneView]
+[DisallowMultipleComponent]
 [ExecuteAlways]
 public class PostProcessLayer : MonoBehaviour
 {
@@ -2651,12 +2651,12 @@ public class PostProcessLayer : MonoBehaviour
 	[SerializeField]
 	private PostProcessResources m_Resources;
 
-	[Preserve]
 	[SerializeField]
+	[Preserve]
 	private bool m_ShowToolkit;
 
-	[SerializeField]
 	[Preserve]
+	[SerializeField]
 	private bool m_ShowCustomSorter;
 
 	public bool breakBeforeColorGrading;
@@ -4271,8 +4271,8 @@ public sealed class AmbientOcclusion : PostProcessEffectSettings
 		value = 0f
 	};
 
-	[ColorUsage(false)]
 	[Tooltip("The custom color to use for the ambient occlusion. The default is black.")]
+	[ColorUsage(false)]
 	public ColorParameter color = new ColorParameter
 	{
 		value = Color.black
@@ -4302,8 +4302,8 @@ public sealed class AmbientOcclusion : PostProcessEffectSettings
 		value = -12f
 	};
 
-	[Tooltip("This modifies the thickness of occluders. It increases the size of dark areas and also introduces a dark halo around objects.")]
 	[Range(1f, 10f)]
+	[Tooltip("This modifies the thickness of occluders. It increases the size of dark areas and also introduces a dark halo around objects.")]
 	public FloatParameter thicknessModifier = new FloatParameter
 	{
 		value = 1f
@@ -4462,17 +4462,17 @@ using UnityEngine.Rendering.PostProcessing;
 [PostProcess(typeof(AutoExposureRenderer), "Unity/Auto Exposure", true)]
 public sealed class AutoExposure : PostProcessEffectSettings
 {
+	[Tooltip("Filters the bright and dark parts of the histogram when computing the average luminance. This is to avoid very dark pixels and very bright pixels from contributing to the auto exposure. Unit is in percent.")]
 	[UnityEngine.Rendering.PostProcessing.MinMax(1f, 99f)]
 	[DisplayName("Filtering (%)")]
-	[Tooltip("Filters the bright and dark parts of the histogram when computing the average luminance. This is to avoid very dark pixels and very bright pixels from contributing to the auto exposure. Unit is in percent.")]
 	public Vector2Parameter filtering = new Vector2Parameter
 	{
 		value = new Vector2(50f, 95f)
 	};
 
-	[Tooltip("Minimum average luminance to consider for auto exposure. Unit is EV.")]
-	[DisplayName("Minimum (EV)")]
 	[Range(-9f, 9f)]
+	[DisplayName("Minimum (EV)")]
+	[Tooltip("Minimum average luminance to consider for auto exposure. Unit is EV.")]
 	public FloatParameter minLuminance = new FloatParameter
 	{
 		value = 0f
@@ -4494,22 +4494,22 @@ public sealed class AutoExposure : PostProcessEffectSettings
 		value = 1f
 	};
 
-	[Tooltip("Use \"Progressive\" if you want auto exposure to be animated. Use \"Fixed\" otherwise.")]
 	[DisplayName("Type")]
+	[Tooltip("Use \"Progressive\" if you want auto exposure to be animated. Use \"Fixed\" otherwise.")]
 	public EyeAdaptationParameter eyeAdaptation = new EyeAdaptationParameter
 	{
 		value = EyeAdaptation.Progressive
 	};
 
-	[Tooltip("Adaptation speed from a dark to a light environment.")]
 	[Min(0f)]
+	[Tooltip("Adaptation speed from a dark to a light environment.")]
 	public FloatParameter speedUp = new FloatParameter
 	{
 		value = 2f
 	};
 
-	[Min(0f)]
 	[Tooltip("Adaptation speed from a light to a dark environment.")]
+	[Min(0f)]
 	public FloatParameter speedDown = new FloatParameter
 	{
 		value = 1f
@@ -4680,8 +4680,8 @@ public sealed class Bloom : PostProcessEffectSettings
 		value = 7f
 	};
 
-	[Range(-1f, 1f)]
 	[Tooltip("Distorts the bloom to give an anamorphic look. Negative values distort vertically, positive values distort horizontally.")]
+	[Range(-1f, 1f)]
 	public FloatParameter anamorphicRatio = new FloatParameter
 	{
 		value = 0f
@@ -4701,16 +4701,16 @@ public sealed class Bloom : PostProcessEffectSettings
 		value = false
 	};
 
-	[Tooltip("The lens dirt texture used to add smudges or dust to the bloom effect.")]
 	[DisplayName("Texture")]
+	[Tooltip("The lens dirt texture used to add smudges or dust to the bloom effect.")]
 	public TextureParameter dirtTexture = new TextureParameter
 	{
 		value = null
 	};
 
 	[Min(0f)]
-	[Tooltip("The intensity of the lens dirtiness.")]
 	[DisplayName("Intensity")]
+	[Tooltip("The intensity of the lens dirtiness.")]
 	public FloatParameter dirtIntensity = new FloatParameter
 	{
 		value = 0f
@@ -5095,15 +5095,15 @@ using UnityEngine.Rendering.PostProcessing;
 [PostProcess(typeof(ColorGradingRenderer), "Unity/Color Grading", true)]
 public sealed class ColorGrading : PostProcessEffectSettings
 {
-	[Tooltip("Select a color grading mode that fits your dynamic range and workflow. Use HDR if your camera is set to render in HDR and your target platform supports it. Use LDR for low-end mobiles or devices that don't support HDR. Use External if you prefer authoring a Log LUT in an external software.")]
 	[DisplayName("Mode")]
+	[Tooltip("Select a color grading mode that fits your dynamic range and workflow. Use HDR if your camera is set to render in HDR and your target platform supports it. Use LDR for low-end mobiles or devices that don't support HDR. Use External if you prefer authoring a Log LUT in an external software.")]
 	public GradingModeParameter gradingMode = new GradingModeParameter
 	{
 		value = GradingMode.HighDefinitionRange
 	};
 
-	[Tooltip("A custom 3D log-encoded texture.")]
 	[DisplayName("Lookup Texture")]
+	[Tooltip("A custom 3D log-encoded texture.")]
 	public TextureParameter externalLut = new TextureParameter
 	{
 		value = null
@@ -5116,9 +5116,9 @@ public sealed class ColorGrading : PostProcessEffectSettings
 		value = Tonemapper.None
 	};
 
+	[DisplayName("Toe Strength")]
 	[Tooltip("Affects the transition between the toe and the mid section of the curve. A value of 0 means no toe, a value of 1 means a very hard transition.")]
 	[Range(0f, 1f)]
-	[DisplayName("Toe Strength")]
 	public FloatParameter toneCurveToeStrength = new FloatParameter
 	{
 		value = 0f
@@ -5132,17 +5132,17 @@ public sealed class ColorGrading : PostProcessEffectSettings
 		value = 0.5f
 	};
 
-	[DisplayName("Shoulder Strength")]
 	[Tooltip("Affects the transition between the mid section and the shoulder of the curve. A value of 0 means no shoulder, a value of 1 means a very hard transition.")]
+	[DisplayName("Shoulder Strength")]
 	[Range(0f, 1f)]
 	public FloatParameter toneCurveShoulderStrength = new FloatParameter
 	{
 		value = 0f
 	};
 
-	[Min(0f)]
 	[DisplayName("Shoulder Length")]
 	[Tooltip("Affects how many F-stops (EV) to add to the dynamic range of the curve.")]
+	[Min(0f)]
 	public FloatParameter toneCurveShoulderLength = new FloatParameter
 	{
 		value = 0.5f
@@ -5157,24 +5157,24 @@ public sealed class ColorGrading : PostProcessEffectSettings
 	};
 
 	[Tooltip("Applies a gamma function to the curve.")]
-	[Min(0.001f)]
 	[DisplayName("Gamma")]
+	[Min(0.001f)]
 	public FloatParameter toneCurveGamma = new FloatParameter
 	{
 		value = 1f
 	};
 
-	[Tooltip("Custom lookup texture (strip format, for example 256x16) to apply before the rest of the color grading operators. If none is provided, a neutral one will be generated internally.")]
 	[DisplayName("Lookup Texture")]
+	[Tooltip("Custom lookup texture (strip format, for example 256x16) to apply before the rest of the color grading operators. If none is provided, a neutral one will be generated internally.")]
 	public TextureParameter ldrLut = new TextureParameter
 	{
 		value = null,
 		defaultState = TextureParameterDefault.Lut2D
 	};
 
+	[DisplayName("Contribution")]
 	[Tooltip("How much of the lookup texture will contribute to the color grading effect.")]
 	[Range(0f, 1f)]
-	[DisplayName("Contribution")]
 	public FloatParameter ldrLutContribution = new FloatParameter
 	{
 		value = 1f
@@ -5188,32 +5188,32 @@ public sealed class ColorGrading : PostProcessEffectSettings
 		value = 0f
 	};
 
-	[Range(-100f, 100f)]
 	[DisplayName("Tint")]
 	[Tooltip("Sets the white balance to compensate for a green or magenta tint.")]
+	[Range(-100f, 100f)]
 	public FloatParameter tint = new FloatParameter
 	{
 		value = 0f
 	};
 
+	[DisplayName("Color Filter")]
 	[Tooltip("Tint the render by multiplying a color.")]
 	[ColorUsage(false, true)]
-	[DisplayName("Color Filter")]
 	public ColorParameter colorFilter = new ColorParameter
 	{
 		value = Color.white
 	};
 
 	[Tooltip("Shift the hue of all colors.")]
-	[DisplayName("Hue Shift")]
 	[Range(-180f, 180f)]
+	[DisplayName("Hue Shift")]
 	public FloatParameter hueShift = new FloatParameter
 	{
 		value = 0f
 	};
 
-	[DisplayName("Saturation")]
 	[Range(-100f, 100f)]
+	[DisplayName("Saturation")]
 	[Tooltip("Pushes the intensity of all colors.")]
 	public FloatParameter saturation = new FloatParameter
 	{
@@ -5235,9 +5235,9 @@ public sealed class ColorGrading : PostProcessEffectSettings
 		value = 0f
 	};
 
-	[Tooltip("Expands or shrinks the overall range of tonal values.")]
-	[Range(-100f, 100f)]
 	[DisplayName("Contrast")]
+	[Range(-100f, 100f)]
+	[Tooltip("Expands or shrinks the overall range of tonal values.")]
 	public FloatParameter contrast = new FloatParameter
 	{
 		value = 0f
@@ -5250,25 +5250,25 @@ public sealed class ColorGrading : PostProcessEffectSettings
 		value = MaskingMode.None
 	};
 
-	[Tooltip("Mask intensity.")]
 	[DisplayName("Intensity")]
 	[Range(0f, 10f)]
+	[Tooltip("Mask intensity.")]
 	public FloatParameter maskIntensity = new FloatParameter
 	{
 		value = 1f
 	};
 
-	[DisplayName("Red")]
 	[Range(-200f, 200f)]
 	[Tooltip("Modify influence of the red channel in the overall mix.")]
+	[DisplayName("Red")]
 	public FloatParameter mixerRedOutRedIn = new FloatParameter
 	{
 		value = 100f
 	};
 
-	[DisplayName("Green")]
-	[Range(-200f, 200f)]
 	[Tooltip("Modify influence of the green channel in the overall mix.")]
+	[Range(-200f, 200f)]
+	[DisplayName("Green")]
 	public FloatParameter mixerRedOutGreenIn = new FloatParameter
 	{
 		value = 0f
@@ -5307,15 +5307,15 @@ public sealed class ColorGrading : PostProcessEffectSettings
 	};
 
 	[Tooltip("Modify influence of the red channel in the overall mix.")]
-	[DisplayName("Red")]
 	[Range(-200f, 200f)]
+	[DisplayName("Red")]
 	public FloatParameter mixerBlueOutRedIn = new FloatParameter
 	{
 		value = 0f
 	};
 
-	[Tooltip("Modify influence of the green channel in the overall mix.")]
 	[Range(-200f, 200f)]
+	[Tooltip("Modify influence of the green channel in the overall mix.")]
 	[DisplayName("Green")]
 	public FloatParameter mixerBlueOutGreenIn = new FloatParameter
 	{
@@ -5331,23 +5331,23 @@ public sealed class ColorGrading : PostProcessEffectSettings
 	};
 
 	[Trackball(TrackballAttribute.Mode.Lift)]
-	[DisplayName("Lift")]
 	[Tooltip("Controls the darkest portions of the render.")]
+	[DisplayName("Lift")]
 	public Vector4Parameter lift = new Vector4Parameter
 	{
 		value = new Vector4(1f, 1f, 1f, 0f)
 	};
 
-	[DisplayName("Gamma")]
 	[Tooltip("Power function that controls mid-range tones.")]
+	[DisplayName("Gamma")]
 	[Trackball(TrackballAttribute.Mode.Gamma)]
 	public Vector4Parameter gamma = new Vector4Parameter
 	{
 		value = new Vector4(1f, 1f, 1f, 0f)
 	};
 
-	[Tooltip("Controls the lightest portions of the render.")]
 	[DisplayName("Gain")]
+	[Tooltip("Controls the lightest portions of the render.")]
 	[Trackball(TrackballAttribute.Mode.Gain)]
 	public Vector4Parameter gain = new Vector4Parameter
 	{
@@ -6038,22 +6038,22 @@ public sealed class DepthOfField : PostProcessEffectSettings
 		value = 10f
 	};
 
-	[Range(0.05f, 32f)]
 	[Tooltip("Ratio of aperture (known as f-stop or f-number). The smaller the value is, the shallower the depth of field is.")]
+	[Range(0.05f, 32f)]
 	public FloatParameter aperture = new FloatParameter
 	{
 		value = 5.6f
 	};
 
-	[Tooltip("Distance between the lens and the film. The larger the value is, the shallower the depth of field is.")]
 	[Range(1f, 300f)]
+	[Tooltip("Distance between the lens and the film. The larger the value is, the shallower the depth of field is.")]
 	public FloatParameter focalLength = new FloatParameter
 	{
 		value = 50f
 	};
 
-	[DisplayName("Max Blur Size")]
 	[Tooltip("Convolution kernel size of the bokeh filter, which determines the maximum radius of bokeh. It also affects performances (the larger the kernel is, the longer the GPU time is required).")]
+	[DisplayName("Max Blur Size")]
 	public KernelSizeParameter kernelSize = new KernelSizeParameter
 	{
 		value = KernelSize.Medium
@@ -6310,8 +6310,8 @@ using UnityEngine.Serialization;
 [Preserve]
 public sealed class FastApproximateAntialiasing
 {
-	[FormerlySerializedAs("mobileOptimized")]
 	[Tooltip("Boost performances by lowering the effect quality. This setting is meant to be used on mobile and other low-end platforms but can also provide a nice performance boost on desktops and consoles.")]
+	[FormerlySerializedAs("mobileOptimized")]
 	public bool fastMode;
 
 	[Tooltip("Keep alpha channel. This will slightly lower the effect quality but allows rendering against a transparent background.")]
@@ -6397,8 +6397,8 @@ public sealed class Grain : PostProcessEffectSettings
 		value = true
 	};
 
-	[Tooltip("Grain strength. Higher values mean more visible grain.")]
 	[Range(0f, 1f)]
+	[Tooltip("Grain strength. Higher values mean more visible grain.")]
 	public FloatParameter intensity = new FloatParameter
 	{
 		value = 0f
@@ -6411,9 +6411,9 @@ public sealed class Grain : PostProcessEffectSettings
 		value = 1f
 	};
 
+	[Tooltip("Controls the noise response curve based on scene luminance. Lower values mean less noise in dark areas.")]
 	[Range(0f, 1f)]
 	[DisplayName("Luminance Contribution")]
-	[Tooltip("Controls the noise response curve based on scene luminance. Lower values mean less noise in dark areas.")]
 	public FloatParameter lumContrib = new FloatParameter
 	{
 		value = 0.8f
@@ -6527,15 +6527,15 @@ public sealed class LensDistortion : PostProcessEffectSettings
 	};
 
 	[Range(0f, 1f)]
-	[Tooltip("Intensity multiplier on the x-axis. Set it to 0 to disable distortion on this axis.")]
 	[DisplayName("X Multiplier")]
+	[Tooltip("Intensity multiplier on the x-axis. Set it to 0 to disable distortion on this axis.")]
 	public FloatParameter intensityX = new FloatParameter
 	{
 		value = 1f
 	};
 
-	[DisplayName("Y Multiplier")]
 	[Range(0f, 1f)]
+	[DisplayName("Y Multiplier")]
 	[Tooltip("Intensity multiplier on the y-axis. Set it to 0 to disable distortion on this axis.")]
 	public FloatParameter intensityY = new FloatParameter
 	{
@@ -6550,8 +6550,8 @@ public sealed class LensDistortion : PostProcessEffectSettings
 		value = 0f
 	};
 
-	[Range(-1f, 1f)]
 	[Tooltip("Distortion center point (y-axis).")]
+	[Range(-1f, 1f)]
 	public FloatParameter centerY = new FloatParameter
 	{
 		value = 0f
@@ -7977,8 +7977,8 @@ public sealed class TemporalAntialiasing
 		SolverNoDilate
 	}
 
-	[Range(0.1f, 1f)]
 	[Tooltip("The diameter (in texels) inside which jitter samples are spread. Smaller values result in crisper but more aliased output, while larger values result in more stable, but blurrier, output.")]
+	[Range(0.1f, 1f)]
 	public float jitterSpread = 0.75f;
 
 	[Tooltip("Controls the amount of sharpening applied to the color buffer. High values may introduce dark-border artifacts.")]
@@ -8263,8 +8263,8 @@ public sealed class Vignette : PostProcessEffectSettings
 		value = new Vector2(0.5f, 0.5f)
 	};
 
-	[Range(0f, 1f)]
 	[Tooltip("Amount of vignetting on screen.")]
+	[Range(0f, 1f)]
 	public FloatParameter intensity = new FloatParameter
 	{
 		value = 0f
@@ -8296,8 +8296,8 @@ public sealed class Vignette : PostProcessEffectSettings
 		value = null
 	};
 
-	[Tooltip("Mask opacity.")]
 	[Range(0f, 1f)]
+	[Tooltip("Mask opacity.")]
 	public FloatParameter opacity = new FloatParameter
 	{
 		value = 1f
@@ -15971,8 +15971,8 @@ using Facepunch.Flexbox;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(RectTransform))]
 [DisallowMultipleComponent]
+[RequireComponent(typeof(RectTransform))]
 [ExecuteAlways]
 public class FlexGridsElement : FlexElementBase
 {
@@ -15996,13 +15996,13 @@ public class FlexGridsElement : FlexElementBase
 	[Min(0f)]
 	public float Gap;
 
-	[Tooltip("The number of columns to use when using a fixed number of columns.")]
 	[Min(1f)]
+	[Tooltip("The number of columns to use when using a fixed number of columns.")]
 	public int ColumnCount = 1;
 
-	[FormerlySerializedAs("ColumnWidth")]
-	[Tooltip("The minimum width of each column when not using a fixed number of columns.")]
 	[Min(1f)]
+	[Tooltip("The minimum width of each column when not using a fixed number of columns.")]
+	[FormerlySerializedAs("ColumnWidth")]
 	public int ColumnMinWidth = 100;
 
 	public bool FixedRowCount;
@@ -23702,13 +23702,13 @@ public static class Analytics
 			//IL_00e7: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0361: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0366: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0436: Unknown result type (might be due to invalid IL or missing references)
+			//IL_0426: Unknown result type (might be due to invalid IL or missing references)
 			//IL_01e8: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0473: Unknown result type (might be due to invalid IL or missing references)
-			//IL_048a: Unknown result type (might be due to invalid IL or missing references)
-			//IL_05f7: Unknown result type (might be due to invalid IL or missing references)
-			//IL_060e: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0625: Unknown result type (might be due to invalid IL or missing references)
+			//IL_0463: Unknown result type (might be due to invalid IL or missing references)
+			//IL_047a: Unknown result type (might be due to invalid IL or missing references)
+			//IL_05e7: Unknown result type (might be due to invalid IL or missing references)
+			//IL_05fe: Unknown result type (might be due to invalid IL or missing references)
+			//IL_0615: Unknown result type (might be due to invalid IL or missing references)
 			if (!GameplayAnalytics)
 			{
 				return;
@@ -23792,8 +23792,7 @@ public static class Analytics
 				}
 				if (info.ProjectileID != 0)
 				{
-					eventRecord.AddField("projectile_id", info.ProjectileID).AddField("projectile_integrity", info.ProjectileIntegrity).AddField("projectile_hits", info.ProjectileHits)
-						.AddField("trajectory_mismatch", info.ProjectileTrajectoryMismatch)
+					eventRecord.AddField("projectile_integrity", info.ProjectileIntegrity).AddField("projectile_hits", info.ProjectileHits).AddField("trajectory_mismatch", info.ProjectileTrajectoryMismatch)
 						.AddField("travel_time", info.ProjectileTravelTime)
 						.AddField("projectile_velocity", info.ProjectileVelocity)
 						.AddField("projectile_prefab", ((Object)info.ProjectilePrefab).name);
@@ -26905,13 +26904,13 @@ public static class Azure
 		//IL_00e7: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0361: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0366: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0436: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0426: Unknown result type (might be due to invalid IL or missing references)
 		//IL_01e8: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0473: Unknown result type (might be due to invalid IL or missing references)
-		//IL_048a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_05f7: Unknown result type (might be due to invalid IL or missing references)
-		//IL_060e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0625: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0463: Unknown result type (might be due to invalid IL or missing references)
+		//IL_047a: Unknown result type (might be due to invalid IL or missing references)
+		//IL_05e7: Unknown result type (might be due to invalid IL or missing references)
+		//IL_05fe: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0615: Unknown result type (might be due to invalid IL or missing references)
 		if (!GameplayAnalytics)
 		{
 			return;
@@ -26995,8 +26994,7 @@ public static class Azure
 			}
 			if (info.ProjectileID != 0)
 			{
-				eventRecord.AddField("projectile_id", info.ProjectileID).AddField("projectile_integrity", info.ProjectileIntegrity).AddField("projectile_hits", info.ProjectileHits)
-					.AddField("trajectory_mismatch", info.ProjectileTrajectoryMismatch)
+				eventRecord.AddField("projectile_integrity", info.ProjectileIntegrity).AddField("projectile_hits", info.ProjectileHits).AddField("trajectory_mismatch", info.ProjectileTrajectoryMismatch)
 					.AddField("travel_time", info.ProjectileTravelTime)
 					.AddField("projectile_velocity", info.ProjectileVelocity)
 					.AddField("projectile_prefab", ((Object)info.ProjectilePrefab).name);

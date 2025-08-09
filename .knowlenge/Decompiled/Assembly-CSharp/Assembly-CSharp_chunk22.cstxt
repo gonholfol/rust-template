@@ -1583,8 +1583,8 @@ using Facepunch;
 using Rust.Ai.Gen2;
 using UnityEngine;
 
-[SoftRequireComponent(typeof(LimitedTurnNavAgent), typeof(RootMotionPlayer), typeof(SenseComponent))]
 [SoftRequireComponent(typeof(BlackboardComponent), typeof(NPCEncounterTimer))]
+[SoftRequireComponent(typeof(LimitedTurnNavAgent), typeof(RootMotionPlayer), typeof(SenseComponent))]
 public class FSMComponent : EntityComponent<BaseEntity>
 {
 	public class TickFSMWorkQueue : PersistentObjectWorkQueue<FSMComponent>
@@ -3586,8 +3586,8 @@ public class LimitedTurnNavAgent : EntityComponent<BaseEntity>
 	[SerializeField]
 	private NavMeshAgent agent;
 
-	[SerializeField]
 	[Header("Speed")]
+	[SerializeField]
 	private float sneakSpeed = 0.6f;
 
 	[SerializeField]
@@ -7554,8 +7554,8 @@ public class UI_MenuManager : SingletonComponent<UI_MenuManager>
 	[SerializeField]
 	private Transform _genericPopupParent;
 
-	[Header("Background Image Settings")]
 	[SerializeField]
+	[Header("Background Image Settings")]
 	private CanvasGroup _homeVideoOverlay;
 
 	[SerializeField]
@@ -7773,8 +7773,8 @@ using UnityEngine;
 
 public class UI_NotificationEntry : MonoBehaviour
 {
-	[Header("Icons")]
 	[SerializeField]
+	[Header("Icons")]
 	private RustIcon _basicIcon;
 
 	[SerializeField]
@@ -8220,6 +8220,11 @@ public class UI_SessionPage : UI_Page
 {
 	public static UI_SessionPage Instance;
 
+	public HttpImage serverLogoImage;
+
+	[SerializeField]
+	private RustText _topServerName;
+
 	[SerializeField]
 	private GameObject _rustPlusBanner;
 
@@ -8340,8 +8345,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RectTransform))]
 public class UI_FoilShaderMouseFollow : MonoBehaviour
 {
-	[Header("Foil Shader Settings")]
 	[SerializeField]
+	[Header("Foil Shader Settings")]
 	private RawImage _rawImage;
 
 	[SerializeField]
@@ -8443,8 +8448,8 @@ public class UI_MenuNavigationGroup : UI_RustButtonGroup
 		public string Path;
 	}
 
-	[Header("Navigation Groups (IGNORE BUTTON GROUPS - Just Add Here)")]
 	[SerializeField]
+	[Header("Navigation Groups (IGNORE BUTTON GROUPS - Just Add Here)")]
 	private List<TabButton> _navigationGroups = new List<TabButton>();
 }
 
@@ -8457,16 +8462,6 @@ private class TabButton
 	public RustButton Button;
 
 	public string Path;
-}
-
-
-using Rust.UI.MainMenu;
-using UnityEngine;
-
-public class UI_ShowTutorialModal : MonoBehaviour
-{
-	[SerializeField]
-	private UI_TutorialModal _tutorialModal;
 }
 
 

@@ -557,8 +557,8 @@ public class IndividualSpawner : BaseMonoBehaviour, IServerComponent, ISpawnPoin
 
 	public LayerMask customBoundsCheckMask;
 
-	[SerializeField]
 	[Tooltip("Simply spawns the entity once. No respawning. Entity can be saved if desired.")]
+	[SerializeField]
 	public bool oneTimeSpawner;
 
 	internal bool isSpawnerActive = true;
@@ -4434,8 +4434,8 @@ using UnityEngine;
 public class TriggerParent : TriggerBase, IServerComponent
 {
 	[Header("General")]
-	[Tooltip("Deparent if the parented entity clips into an obstacle")]
 	[SerializeField]
+	[Tooltip("Deparent if the parented entity clips into an obstacle")]
 	public bool doClippingCheck;
 
 	[Tooltip("If deparenting via clipping, this will be used (if assigned) to also move the entity to a valid dismount position")]
@@ -4456,8 +4456,8 @@ public class TriggerParent : TriggerBase, IServerComponent
 	[Tooltip("When parenting an NPC don't check if they are shop keepers or mission providers.")]
 	public bool SkipNPCChecks;
 
-	[Header("Other")]
 	[Tooltip("If the player is already parented to something else, they'll switch over to another parent only if this is true")]
+	[Header("Other")]
 	public bool overrideOtherTriggers;
 
 	[Tooltip("Requires associatedMountable to be set. Prevents players entering the trigger if there's something between their feet and the bottom of the parent trigger")]
@@ -5960,8 +5960,8 @@ using UnityEngine;
 
 public class TubeRenderer : FacepunchBehaviour
 {
-	[Range(3f, 64f)]
 	[Header("Settings")]
+	[Range(3f, 64f)]
 	public int Segments = 12;
 
 	public float Radius = 0.1f;
@@ -8578,8 +8578,8 @@ public class Wearable : MonoBehaviour, IItemSetup, IPrefabPreProcess
 	[Tooltip("If this is true, we'll hide this item in the first person view. Usually done for items that you definitely won't see in first person view, like facemasks and hats.")]
 	public bool HideInFirstPerson;
 
-	[Tooltip("Use this if the clothing item clips into the player view. It'll push the chest legs model backwards.")]
 	[Range(0f, 5f)]
+	[Tooltip("Use this if the clothing item clips into the player view. It'll push the chest legs model backwards.")]
 	public float ExtraLeanBack;
 
 	[Tooltip("Enable this to check for BoneRetargets which need to be preserved in first person view")]
@@ -8900,6 +8900,7 @@ public class WearableNotifyLifestate : WearableNotify
 }
 
 
+using Facepunch.BurstCloth;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8908,6 +8909,8 @@ public class WearableNotifyTrophyMounted : WearableNotify
 	public UnityEvent OnMounted = new UnityEvent();
 
 	public Renderer[] EmissionToggles;
+
+	public BurstCloth[] BurstCloths;
 }
 
 
@@ -29344,8 +29347,8 @@ public class RadialBlur : PostProcessEffectSettings
 		value = 0f
 	};
 
-	[Header("Blur Quality")]
 	[Range(0f, 3f)]
+	[Header("Blur Quality")]
 	public FixedIntParameter downsample = new FixedIntParameter
 	{
 		value = 1

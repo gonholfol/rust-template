@@ -1548,8 +1548,8 @@ public class LegStepAnimatingParameters
 	[FPD_FixedCurveWindow(0f, 0f, 1f, 1.25f, 0.4f, 0.5f, 1f, 1f)]
 	public AnimationCurve MoveToGoalCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
-	[FPD_FixedCurveWindow(0f, -1f, 1f, 1f, 0.4f, 0.6f, 0.9f, 1f)]
 	[Tooltip("Making foot motion move towards target not in full linear straight towards target motion but adding a bit curve back (positive value) or forward (negative values) making movement a bit more natural")]
+	[FPD_FixedCurveWindow(0f, -1f, 1f, 1f, 0.4f, 0.6f, 0.9f, 1f)]
 	public AnimationCurve SpherizeTrack = AnimationCurve.EaseInOut(0f, 0f, 1f, 0f);
 
 	[Range(0f, 2f)]
@@ -1567,9 +1567,9 @@ public class LegStepAnimatingParameters
 	[FPD_FixedCurveWindow(0f, 0f, 1f, 1f, 0.5f, 1f, 0.5f, 1f)]
 	public AnimationCurve RaiseYAxisCurve;
 
-	[Space(3f)]
 	[Tooltip("Allowing to speed up leg adjusting animation when leg is getting stretched, when opposite leg is requesting adjustement or when main character is rotating in place quickly")]
 	[Range(0f, 1f)]
+	[Space(3f)]
 	public float AllowSpeedups = 0.4f;
 
 	[Tooltip("You can allow to use opposite leg before idle glue leg adjustement finishes")]
@@ -5979,8 +5979,8 @@ public class FGroundFitter_Demo_NavMesh : MonoBehaviour
 	[Range(0.5f, 50f)]
 	public float RotationSpeed = 3f;
 
-	[Range(0f, 1f)]
 	[Tooltip("Moving Accordingly to rotation after acceleration")]
+	[Range(0f, 1f)]
 	public float DirectMovement = 0.8f;
 
 	public float AnimationSpeedScale = 1f;
@@ -7275,8 +7275,8 @@ public abstract class FGroundFitter_Base : MonoBehaviour
 
 	[Header("> Tweaking Settings <", order = 0)]
 	[Space(4f, order = 1)]
-	[Tooltip("If forward/pitch rotation value should go in lighter value than real normal hit direction")]
 	[Range(0f, 1f)]
+	[Tooltip("If forward/pitch rotation value should go in lighter value than real normal hit direction")]
 	public float MildForwardValue;
 
 	[Tooltip("Maximum rotation angle in rotation of x/pitch axis, so rotating forward - degrees value of maximum rotation")]
@@ -7293,8 +7293,8 @@ public abstract class FGroundFitter_Base : MonoBehaviour
 	public float MaxHorizontalRotation = 90f;
 
 	[Tooltip("We should cast raycast from position little higher than foots of your game object")]
-	[Header("> Advanced settings <", order = 0)]
 	[Space(4f, order = 1)]
+	[Header("> Advanced settings <", order = 0)]
 	public float RaycastHeightOffset = 0.5f;
 
 	[Tooltip("How far ray should cast to check if ground is under feet")]
@@ -7322,8 +7322,8 @@ public abstract class FGroundFitter_Base : MonoBehaviour
 
 	internal Vector3 WorldUp = Vector3.up;
 
-	[Tooltip("Casting more raycsts under object to detect ground more precisely, then we use average from all casts to set new rotation")]
 	[Space(8f)]
+	[Tooltip("Casting more raycsts under object to detect ground more precisely, then we use average from all casts to set new rotation")]
 	public bool ZoneCast;
 
 	public Vector2 ZoneCastDimensions = new Vector2(0.3f, 0.5f);
@@ -7333,8 +7333,8 @@ public abstract class FGroundFitter_Base : MonoBehaviour
 	[Range(0f, 10f)]
 	public float ZoneCastBias;
 
-	[Tooltip("More precision = more raycasts = lower performance")]
 	[Range(0f, 1f)]
+	[Tooltip("More precision = more raycasts = lower performance")]
 	public float ZoneCastPrecision = 0.25f;
 
 	[NonSerialized]
@@ -7742,16 +7742,16 @@ public abstract class FGroundFitter_Base_RootMotion : FGroundFitter_Base
 	[Tooltip("Making ground fitter translate with root motion")]
 	public bool HandleRootMotion;
 
-	[HideInInspector]
 	[SerializeField]
+	[HideInInspector]
 	protected Transform parentTransform;
 
 	[SerializeField]
 	[HideInInspector]
 	protected CharacterController optionalCharContr;
 
-	[SerializeField]
 	[HideInInspector]
+	[SerializeField]
 	protected bool rootMotionRotation = true;
 
 	protected Animator rootMAnimator;
@@ -19468,8 +19468,8 @@ internal struct OceanTraceJob : IJobParallelForDefer
 
 	public float OneOverOctave0Scale;
 
-	[NativeDisableParallelForRestriction]
 	[ReadOnly]
+	[NativeDisableParallelForRestriction]
 	public NativeOceanDisplacementShort3 SimData;
 
 	public int Spectrum0;
@@ -20540,8 +20540,8 @@ internal struct RefillOceanJob : IJobParallelFor
 
 	public ReadOnly<float> HeightMap;
 
-	[NativeDisableParallelForRestriction]
 	[WriteOnly]
+	[NativeDisableParallelForRestriction]
 	public NativeArray<float> WaterMap;
 
 	public float OceanLevel;
@@ -21710,8 +21710,8 @@ public class TonemappingColorGrading : MonoBehaviour
 	{
 		public bool enabled;
 
-		[Tooltip("Midpoint Adjustment.")]
 		[Min(0f)]
+		[Tooltip("Midpoint Adjustment.")]
 		public float middleGrey;
 
 		[Tooltip("The lowest possible exposure value; adjust this value to modify the brightest areas of your level.")]
@@ -21720,8 +21720,8 @@ public class TonemappingColorGrading : MonoBehaviour
 		[Tooltip("The highest possible exposure value; adjust this value to modify the darkest areas of your level.")]
 		public float max;
 
-		[Tooltip("Speed of linear adaptation. Higher is faster.")]
 		[Min(0f)]
+		[Tooltip("Speed of linear adaptation. Higher is faster.")]
 		public float speed;
 
 		[Tooltip("Displays a luminosity helper in the GameView.")]
@@ -21762,8 +21762,8 @@ public class TonemappingColorGrading : MonoBehaviour
 		[Tooltip("Tonemapping technique to use. ACES is the recommended one.")]
 		public Tonemapper tonemapper;
 
-		[Tooltip("Adjusts the overall exposure of the scene.")]
 		[Min(0f)]
+		[Tooltip("Adjusts the overall exposure of the scene.")]
 		public float exposure;
 
 		[Tooltip("Custom tonemapping curve.")]
@@ -21870,25 +21870,25 @@ public class TonemappingColorGrading : MonoBehaviour
 		[Range(-2f, 2f)]
 		public float temperatureShift;
 
-		[Range(-2f, 2f)]
 		[Tooltip("Sets the white balance to compensate for a green or magenta tint.")]
+		[Range(-2f, 2f)]
 		public float tint;
 
-		[Space]
 		[Range(-0.5f, 0.5f)]
 		[Tooltip("Shift the hue of all colors.")]
+		[Space]
 		public float hue;
 
 		[Range(0f, 2f)]
 		[Tooltip("Pushes the intensity of all colors.")]
 		public float saturation;
 
-		[Tooltip("Adjusts the saturation so that clipping is minimized as colors approach full saturation.")]
 		[Range(-1f, 1f)]
+		[Tooltip("Adjusts the saturation so that clipping is minimized as colors approach full saturation.")]
 		public float vibrance;
 
-		[Tooltip("Brightens or darkens all colors.")]
 		[Range(0f, 10f)]
+		[Tooltip("Brightens or darkens all colors.")]
 		public float value;
 
 		[Tooltip("Expands or shrinks the overall range of tonal values.")]
@@ -22010,16 +22010,16 @@ public class TonemappingColorGrading : MonoBehaviour
 		[Space]
 		public BasicsSettings basics;
 
-		[Space]
 		[ChannelMixer]
+		[Space]
 		public ChannelMixerSettings channelMixer;
 
 		[Space]
 		[IndentedGroup]
 		public CurvesSettings curves;
 
-		[Space]
 		[Tooltip("Use dithering to try and minimize color banding in dark areas.")]
+		[Space]
 		public bool useDithering;
 
 		[Tooltip("Displays the generated LUT in the top left corner of the GameView.")]
@@ -22142,8 +22142,8 @@ public struct EyeAdaptationSettings
 {
 	public bool enabled;
 
-	[Tooltip("Midpoint Adjustment.")]
 	[Min(0f)]
+	[Tooltip("Midpoint Adjustment.")]
 	public float middleGrey;
 
 	[Tooltip("The lowest possible exposure value; adjust this value to modify the brightest areas of your level.")]
@@ -22152,8 +22152,8 @@ public struct EyeAdaptationSettings
 	[Tooltip("The highest possible exposure value; adjust this value to modify the darkest areas of your level.")]
 	public float max;
 
-	[Tooltip("Speed of linear adaptation. Higher is faster.")]
 	[Min(0f)]
+	[Tooltip("Speed of linear adaptation. Higher is faster.")]
 	public float speed;
 
 	[Tooltip("Displays a luminosity helper in the GameView.")]
@@ -22199,8 +22199,8 @@ public struct TonemappingSettings
 	[Tooltip("Tonemapping technique to use. ACES is the recommended one.")]
 	public Tonemapper tonemapper;
 
-	[Tooltip("Adjusts the overall exposure of the scene.")]
 	[Min(0f)]
+	[Tooltip("Adjusts the overall exposure of the scene.")]
 	public float exposure;
 
 	[Tooltip("Custom tonemapping curve.")]
@@ -22319,25 +22319,25 @@ public struct BasicsSettings
 	[Range(-2f, 2f)]
 	public float temperatureShift;
 
-	[Range(-2f, 2f)]
 	[Tooltip("Sets the white balance to compensate for a green or magenta tint.")]
+	[Range(-2f, 2f)]
 	public float tint;
 
-	[Space]
 	[Range(-0.5f, 0.5f)]
 	[Tooltip("Shift the hue of all colors.")]
+	[Space]
 	public float hue;
 
 	[Range(0f, 2f)]
 	[Tooltip("Pushes the intensity of all colors.")]
 	public float saturation;
 
-	[Tooltip("Adjusts the saturation so that clipping is minimized as colors approach full saturation.")]
 	[Range(-1f, 1f)]
+	[Tooltip("Adjusts the saturation so that clipping is minimized as colors approach full saturation.")]
 	public float vibrance;
 
-	[Tooltip("Brightens or darkens all colors.")]
 	[Range(0f, 10f)]
+	[Tooltip("Brightens or darkens all colors.")]
 	public float value;
 
 	[Tooltip("Expands or shrinks the overall range of tonal values.")]
@@ -22472,16 +22472,16 @@ public struct ColorGradingSettings
 	[Space]
 	public BasicsSettings basics;
 
-	[Space]
 	[ChannelMixer]
+	[Space]
 	public ChannelMixerSettings channelMixer;
 
 	[Space]
 	[IndentedGroup]
 	public CurvesSettings curves;
 
-	[Space]
 	[Tooltip("Use dithering to try and minimize color banding in dark areas.")]
+	[Space]
 	public bool useDithering;
 
 	[Tooltip("Displays the generated LUT in the top left corner of the GameView.")]
@@ -22514,8 +22514,8 @@ public struct ColorGradingSettings
 using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 
-[ExecuteInEditMode]
 [AddComponentMenu("Image Effects/Other/Scope Overlay")]
+[ExecuteInEditMode]
 public class ScopeEffect : PostEffectsBase, IImageEffect
 {
 	public Material overlayMaterial;
@@ -24860,10 +24860,10 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[AddComponentMenu("UI/Scroll Rect Ex", 37)]
-[RequireComponent(typeof(RectTransform))]
 [ExecuteInEditMode]
 [SelectionBase]
+[AddComponentMenu("UI/Scroll Rect Ex", 37)]
+[RequireComponent(typeof(RectTransform))]
 public class ScrollRectEx : UIBehaviour, IInitializePotentialDragHandler, IEventSystemHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IScrollHandler, ICanvasElement, ILayoutGroup, ILayoutController
 {
 	public enum MovementType
@@ -26490,20 +26490,20 @@ public class UICircle : UIPrimitiveBase
 	[Tooltip("The Arc Invert property will invert the construction of the Arc.")]
 	public bool ArcInvert = true;
 
-	[Range(0f, 1f)]
 	[Tooltip("The Arc property is a percentage of the entire circumference of the circle.")]
+	[Range(0f, 1f)]
 	public float Arc = 1f;
 
 	[Range(0f, 1000f)]
 	[Tooltip("The Arc Steps property defines the number of segments that the Arc will be divided into.")]
 	public int ArcSteps = 100;
 
-	[Range(0f, 360f)]
 	[Tooltip("The Arc Rotation property permits adjusting the geometry orientation around the Z axis.")]
+	[Range(0f, 360f)]
 	public int ArcRotation;
 
-	[Range(0f, 1f)]
 	[Tooltip("The Progress property allows the primitive to be used as a progression indicator.")]
+	[Range(0f, 1f)]
 	public float Progress;
 
 	private float _progress;
@@ -26780,8 +26780,8 @@ using UnityEngine.UI.Extensions;
 [AddComponentMenu("UI/Extensions/Primitives/UI Circle Simple")]
 public class UICircleSimple : UIPrimitiveBase
 {
-	[Range(0f, 1000f)]
 	[Tooltip("The Arc Steps property defines the number of segments that the Arc will be divided into.")]
+	[Range(0f, 1000f)]
 	public int ArcSteps = 100;
 
 	public bool Fill = true;
@@ -27006,8 +27006,8 @@ public class UICornerCut : UIPrimitiveBase
 {
 	public Vector2 cornerSize = new Vector2(16f, 16f);
 
-	[Header("Corners to cut")]
 	[SerializeField]
+	[Header("Corners to cut")]
 	private bool m_cutUL = true;
 
 	[SerializeField]
@@ -27019,12 +27019,12 @@ public class UICornerCut : UIPrimitiveBase
 	[SerializeField]
 	private bool m_cutLR;
 
-	[SerializeField]
 	[Tooltip("Up-Down colors become Left-Right colors")]
+	[SerializeField]
 	private bool m_makeColumns;
 
-	[Header("Color the cut bars differently")]
 	[SerializeField]
+	[Header("Color the cut bars differently")]
 	private bool m_useColorUp;
 
 	[SerializeField]
@@ -27741,28 +27741,28 @@ public class UILineRenderer : UIPrimitiveBase
 	[SerializeField]
 	internal Vector2[] m_points;
 
-	[SerializeField]
 	[Tooltip("Segments to be drawn\n This is a list of arrays of points")]
+	[SerializeField]
 	internal List<Vector2[]> m_segments;
 
 	[Tooltip("Thickness of the line")]
 	[SerializeField]
 	internal float lineThickness = 2f;
 
-	[Tooltip("Use the relative bounds of the Rect Transform (0,0 -> 0,1) or screen space coordinates")]
 	[SerializeField]
+	[Tooltip("Use the relative bounds of the Rect Transform (0,0 -> 0,1) or screen space coordinates")]
 	internal bool relativeSize;
 
-	[Tooltip("Do the points identify a single line or split pairs of lines")]
 	[SerializeField]
+	[Tooltip("Do the points identify a single line or split pairs of lines")]
 	internal bool lineList;
 
 	[SerializeField]
 	[Tooltip("Add end caps to each line\nMultiple caps when used with Line List")]
 	internal bool lineCaps;
 
-	[Tooltip("Resolution of the Bezier curve, different to line Resolution")]
 	[SerializeField]
+	[Tooltip("Resolution of the Bezier curve, different to line Resolution")]
 	internal int bezierSegmentsPerCurve = 10;
 
 	[Tooltip("The type of Join used between lines, Square/Mitre or Curved/Bevel")]

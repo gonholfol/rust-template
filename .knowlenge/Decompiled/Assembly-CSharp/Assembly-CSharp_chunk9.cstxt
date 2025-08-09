@@ -13147,8 +13147,8 @@ public class Socket_Free_Snappable : Socket_Free
 	[SerializeField]
 	private float cornerPadding = -0.01f;
 
-	[SerializeField]
 	[Header("Snapping - Same Deployable")]
+	[SerializeField]
 	private bool allowSnappingToSameDeployable = true;
 
 	[SerializeField]

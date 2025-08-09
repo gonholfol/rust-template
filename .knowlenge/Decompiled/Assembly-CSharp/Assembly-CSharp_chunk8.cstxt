@@ -4008,8 +4008,8 @@ public class NPCVendingOrder : ScriptableObject
 	{
 		public bool useRandom;
 
-		[Range(0f, 1f)]
 		[Tooltip("The higher this number, the more likely this will be chosen")]
+		[Range(0f, 1f)]
 		public float weight;
 
 		[Tooltip("Minimum price for the currency item")]
@@ -4140,8 +4140,8 @@ public struct EntryRandom
 {
 	public bool useRandom;
 
-	[Range(0f, 1f)]
 	[Tooltip("The higher this number, the more likely this will be chosen")]
+	[Range(0f, 1f)]
 	public float weight;
 
 	[Tooltip("Minimum price for the currency item")]

@@ -155,6 +155,7 @@ public class RustigeEggSkinViewer : MonoBehaviour
 
 using System;
 using System.Collections.Generic;
+using Rust.UI.MainMenu;
 using Rust.Workshop;
 using UnityEngine;
 
@@ -186,6 +187,12 @@ public class SkinViewer2 : SingletonComponent<SkinViewer2>
 	{
 		((SingletonComponent)this).Awake();
 		parent.SetActive(false);
+		UI_MenuManager.OnOpenStateChanged = (Action)Delegate.Combine(UI_MenuManager.OnOpenStateChanged, new Action(OnMenuOpenStateChanged));
+	}
+
+	protected override void OnDestroy()
+	{
+		UI_MenuManager.OnOpenStateChanged = (Action)Delegate.Remove(UI_MenuManager.OnOpenStateChanged, new Action(OnMenuOpenStateChanged));
 	}
 
 	public bool TrySet(CoverImage target, IPlayerItemDefinition playerItemDef, Action<bool> skinLoadCallback)
@@ -247,10 +254,11 @@ public class SkinViewer2 : SingletonComponent<SkinViewer2>
 		{
 			if (skin2.id == 0)
 			{
-				WorkshopSkin.Apply(val, workshopID, (Action<Skin>)delegate
+				WorkshopSkin.Apply(val, workshopID, (Action<Skin>)delegate(Skin skin)
 				{
 					if (IsOpen)
 					{
+						RemoveMipMapLimit(skin);
 						skinLoadCallback?.Invoke(obj: true);
 					}
 				}, (Action)null);
@@ -274,6 +282,18 @@ public class SkinViewer2 : SingletonComponent<SkinViewer2>
 			skinLoadCallback?.Invoke(obj: true);
 		}
 		return true;
+	}
+
+	private void RemoveMipMapLimit(Skin skin)
+	{
+		foreach (Texture2D allTexture in skin.GetAllTextures())
+		{
+			if (((Texture)allTexture).isReadable)
+			{
+				allTexture.requestedMipmapLevel = 0;
+				allTexture.ignoreMipmapLimit = true;
+			}
+		}
 	}
 
 	public void RefreshRenderTexture()
@@ -340,6 +360,14 @@ public class SkinViewer2 : SingletonComponent<SkinViewer2>
 			return true;
 		}
 		return false;
+	}
+
+	private void OnMenuOpenStateChanged()
+	{
+		if (!MainMenu.IsOpen())
+		{
+			Close();
+		}
 	}
 
 	[ClientVar(ClientAdmin = true)]
@@ -814,15 +842,38 @@ public static class MenuDiskData
 			if (File.Exists(_menuDataPath))
 			{
 				_menuData = JsonConvert.DeserializeObject<MenuData>(File.ReadAllText(_menuDataPath));
+				if (_menuData == null)
+				{
+					_menuData = new MenuData();
+				}
 			}
 			else
 			{
 				_menuData = new MenuData();
 			}
 		}
-		catch (Exception ex)
+		catch (NullReferenceException ex)
 		{
-			Debug.LogException(ex);
+			Debug.LogWarning((object)("Menu data file corrupted (NRE): " + ex.Message + ". Deleting file and creating a new one."));
+			try
+			{
+				if (File.Exists(_menuDataPath))
+				{
+					File.Delete(_menuDataPath);
+				}
+			}
+			catch (Exception ex2)
+			{
+				Debug.LogException(ex2);
+			}
+			finally
+			{
+				_menuData = new MenuData();
+			}
+		}
+		catch (Exception ex3)
+		{
+			Debug.LogException(ex3);
 			_menuData = new MenuData();
 		}
 	}
@@ -2963,8 +3014,8 @@ public class NexusFerrySounds : MonoBehaviour, IClientComponent
 
 	private float soundCullDistanceSq;
 
-	[SerializeField]
 	[Header("Engine")]
+	[SerializeField]
 	private SoundDefinition engineLoopDef;
 
 	private Sound engineLoop;
@@ -2994,8 +3045,8 @@ public class NexusFerrySounds : MonoBehaviour, IClientComponent
 	[SerializeField]
 	private Transform engineTransform;
 
-	[Header("Water")]
 	[SerializeField]
+	[Header("Water")]
 	private SoundDefinition waterIdleDef;
 
 	[SerializeField]
@@ -3027,8 +3078,8 @@ public class NexusFerrySounds : MonoBehaviour, IClientComponent
 	[SerializeField]
 	private Vector3 sideSoundLineBow;
 
-	[Header("Dock")]
 	[SerializeField]
+	[Header("Dock")]
 	private SoundDefinition dockArrivalSoundDef;
 
 	[SerializeField]
@@ -4044,8 +4095,8 @@ public class FogMachine : ContainerIOEntity, IAlwaysOn
 		return HasFlag(Flags.Reserved5);
 	}
 
-	[RPC_Server]
 	[RPC_Server.IsVisible(3f)]
+	[RPC_Server]
 	public void SetFogOn(RPCMessage msg)
 	{
 		if (!IsEmitting() && !IsOn() && HasFuel() && msg.player.CanBuild())
@@ -4066,8 +4117,8 @@ public class FogMachine : ContainerIOEntity, IAlwaysOn
 		}
 	}
 
-	[RPC_Server]
 	[RPC_Server.IsVisible(3f)]
+	[RPC_Server]
 	public void SetMotionDetection(RPCMessage msg)
 	{
 		bool flag = msg.read.Bit();

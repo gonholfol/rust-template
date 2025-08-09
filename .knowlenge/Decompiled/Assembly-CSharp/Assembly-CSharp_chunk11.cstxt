@@ -72,8 +72,8 @@ public class BaseBoat : BaseVehicle
 
 	protected virtual bool SkipBoatForcedUpdate => false;
 
-	[Help("Seconds until boat starts drifting to shore if there's nobody around")]
 	[ServerVar]
+	[Help("Seconds until boat starts drifting to shore if there's nobody around")]
 	public static int seconds_until_shore_drift(Arg arg)
 	{
 		secondsUntilShoreDrift = arg.GetInt(0, secondsUntilShoreDrift);
@@ -781,8 +781,8 @@ public class Buoyancy : ListComponent<Buoyancy>, IServerComponent, IPrefabPrePro
 	public float underwaterDrag = 2f;
 
 	[Range(0f, 1f)]
-	[Tooltip("How much this object will pay attention to the wave system, 0 = flat water, 1 = full waves (default 1)")]
 	[FormerlySerializedAs("flatWaterLerp")]
+	[Tooltip("How much this object will pay attention to the wave system, 0 = flat water, 1 = full waves (default 1)")]
 	public float wavesEffect = 1f;
 
 	public Action<bool> SubmergedChanged;
@@ -792,8 +792,8 @@ public class Buoyancy : ListComponent<Buoyancy>, IServerComponent, IPrefabPrePro
 	[NonSerialized]
 	public float submergedFraction;
 
-	[SerializeField]
 	[ReadOnly]
+	[SerializeField]
 	private BuoyancyPointData[] pointData;
 
 	private bool initedPointArrays;
@@ -1561,8 +1561,8 @@ public class TugboatSounds : MonoBehaviour, IClientComponent
 
 	private float soundCullDistanceSq;
 
-	[Header("Engine")]
 	[SerializeField]
+	[Header("Engine")]
 	private SoundDefinition engineLoopDef;
 
 	private Sound engineLoop;
@@ -1767,8 +1767,8 @@ public class CarSettings
 
 	public bool disableHandbrakes;
 
-	[Header("Front/Rear Vehicle Balance")]
 	[Range(0f, 1f)]
+	[Header("Front/Rear Vehicle Balance")]
 	public float handlingBias = 0.5f;
 }
 
@@ -2945,8 +2945,8 @@ public class DiverPropulsionVehicleAudio : MonoBehaviour
 	[SerializeField]
 	private AnimationCurve propellerGainCurve;
 
-	[Header("Water")]
 	[SerializeField]
+	[Header("Water")]
 	private SoundDefinition waterMovementLoopDef;
 
 	[SerializeField]
@@ -2979,8 +2979,8 @@ using UnityEngine;
 
 public abstract class GroundVehicle : BaseVehicle, IEngineControllerUser, IEntity, TriggerHurtNotChild.IHurtTriggerUser
 {
-	[Header("GroundVehicle")]
 	[SerializeField]
+	[Header("GroundVehicle")]
 	public GroundVehicleAudio gvAudio;
 
 	[SerializeField]
@@ -3306,8 +3306,8 @@ public abstract class GroundVehicleAudio : MonoBehaviour, IClientComponent
 	[SerializeField]
 	protected GroundVehicle groundVehicle;
 
-	[SerializeField]
 	[Header("Engine")]
+	[SerializeField]
 	private SoundDefinition engineStartSound;
 
 	[SerializeField]
@@ -7286,24 +7286,24 @@ public class RidableHorseAnimation : EntityComponent<RidableHorse>, IClientCompo
 
 	public float spineYawInertiaFactor = 150f;
 
-	[ReadOnly]
 	[SerializeField]
+	[ReadOnly]
 	private Quaternion[] targetNeckRotations;
 
 	[ReadOnly]
 	[SerializeField]
 	private Quaternion[] targetSpineRotations;
 
-	[ReadOnly]
 	[SerializeField]
+	[ReadOnly]
 	private Vector3[] localSpinePositions;
 
 	[SerializeField]
 	[ReadOnly]
 	private Vector3 originalHipPosition;
 
-	[ReadOnly]
 	[SerializeField]
+	[ReadOnly]
 	private Quaternion originalHipRotation;
 
 	public Vector3 spineOffset;
@@ -7340,8 +7340,8 @@ public class RidableHorseAudio : FacepunchBehaviour, IClientComponent
 	[SerializeField]
 	private AnimationCurve saddleMovementGainCurve;
 
-	[Space]
 	[SerializeField]
+	[Space]
 	private MaterialEffect footstepEffects;
 
 	[SerializeField]
@@ -7354,8 +7354,8 @@ public class RidableHorseAudio : FacepunchBehaviour, IClientComponent
 	[SerializeField]
 	private string BaseFolder;
 
-	[SerializeField]
 	[Space]
+	[SerializeField]
 	private SoundDefinition skidLoopSoundDef;
 
 	[SerializeField]
@@ -10323,12 +10323,12 @@ using UnityEngine;
 
 public class SnowmobileAudio : GroundVehicleAudio
 {
-	[SerializeField]
 	[Header("Engine")]
+	[SerializeField]
 	private EngineAudioSet engineAudioSet;
 
-	[SerializeField]
 	[Header("Skis")]
+	[SerializeField]
 	private AnimationCurve skiGainCurve;
 
 	[SerializeField]
@@ -10346,8 +10346,8 @@ public class SnowmobileAudio : GroundVehicleAudio
 	[SerializeField]
 	private SoundDefinition skiSlideWaterSoundDef;
 
-	[Header("Movement")]
 	[SerializeField]
+	[Header("Movement")]
 	private AnimationCurve movementGainCurve;
 
 	[SerializeField]
@@ -10826,8 +10826,8 @@ public class SubmarineAudio : MonoBehaviour
 	[SerializeField]
 	private GameObject dashboardAudioPoint;
 
-	[SerializeField]
 	[Header("Other")]
+	[SerializeField]
 	private SoundDefinition climbOrDiveLoopSound;
 
 	[SerializeField]
@@ -12705,8 +12705,8 @@ using UnityEngine;
 
 public class TrainCarAudio : MonoBehaviour
 {
-	[Header("Train Car Audio")]
 	[SerializeField]
+	[Header("Train Car Audio")]
 	private TrainCar trainCar;
 
 	[SerializeField]
@@ -13294,8 +13294,8 @@ public class TrainEngineAudio : TrainCarAudio
 	[SerializeField]
 	private SoundDefinition hornStart;
 
-	[SerializeField]
 	[Header("Other")]
+	[SerializeField]
 	private SoundDefinition lightsToggleSound;
 
 	[SerializeField]
@@ -14253,8 +14253,8 @@ public class TrainWagonLootData : ScriptableObject
 	[SerializeField]
 	private LootOption[] oreOptions;
 
-	[SerializeField]
 	[ReadOnly]
+	[SerializeField]
 	private LootOption lootWagonContent;
 
 	[SerializeField]
@@ -21890,8 +21890,8 @@ public class Climate : SingletonComponent<Climate>
 		[Horizontal(4, -1)]
 		public Float4 FogAmbientIntensity = Float4.One();
 
-		[Range(0f, 1f)]
 		[Horizontal(4, -1)]
+		[Range(0f, 1f)]
 		public Float4 FogAmbientSaturation = Float4.One();
 
 		[Horizontal(4, -1)]
@@ -22460,8 +22460,8 @@ public class ClimateParameters
 	[Horizontal(4, -1)]
 	public Float4 FogAmbientIntensity = Float4.One();
 
-	[Range(0f, 1f)]
 	[Horizontal(4, -1)]
+	[Range(0f, 1f)]
 	public Float4 FogAmbientSaturation = Float4.One();
 
 	[Horizontal(4, -1)]
@@ -24258,8 +24258,8 @@ public class EffectRecycle : BaseMonoBehaviour, IClientComponent, IRagdollInhert
 	[FormerlySerializedAs("lifeTime")]
 	public float detachTime;
 
-	[ReadOnly]
 	[FormerlySerializedAs("lifeTime")]
+	[ReadOnly]
 	public float recycleTime;
 
 	public PlayMode playMode;
@@ -24453,8 +24453,8 @@ public class EnvironmentVolume : MonoBehaviour, IPrefabPreProcess
 
 	public Vector3 Size = Vector3.one;
 
-	[field: SerializeField]
 	[field: Tooltip("Controls the falloff amount of the positive axes of spatially aware volumes.")]
+	[field: SerializeField]
 	public Vector3 FalloffPositive { get; private set; } = Vector3.zero;
 
 	[field: Tooltip("Controls the falloff amount of the negative axes of spatially aware volumes.")]
@@ -25000,8 +25000,8 @@ public class FakePhysicsRope : FacepunchBehaviour, IClientComponent
 	[Tooltip("The Rope width set at start (changing this value during run time will produce no effect)")]
 	public float ropeWidth = 0.1f;
 
-	[Range(1f, 15f)]
 	[Tooltip("Adjust the middle control point weight for the Rational Bezier curve")]
+	[Range(1f, 15f)]
 	public float midPointWeight = 1f;
 
 	[Tooltip("Use local positions instead of world positions (relative to this object)")]
@@ -25143,14 +25143,14 @@ public class FoliagePlacement : ScriptableObject
 	[Header("Randomization")]
 	public float RandomScaling = 0.2f;
 
-	[MinMax(0f, 1f)]
 	[Header("Placement Range")]
+	[MinMax(0f, 1f)]
 	public MinMax Range = new MinMax(0f, 1f);
 
 	public float RangeFade = 0.1f;
 
-	[Range(0f, 1f)]
 	[Header("LOD")]
+	[Range(0f, 1f)]
 	public float DistanceDensity;
 
 	[Range(1f, 2f)]
@@ -28102,8 +28102,8 @@ public class LevelInfo : SingletonComponent<LevelInfo>
 	[Tooltip("A background image to be shown when loading the map")]
 	public Texture2D image;
 
-	[Space(10f)]
 	[Tooltip("You should incrememnt this version when you make changes to the map that will invalidate old saves")]
+	[Space(10f)]
 	public int version = 1;
 }
 
@@ -28355,8 +28355,8 @@ public class CopyLODValues : MonoBehaviour, IEditorComponent
 	[SerializeField]
 	private LODGroup destination;
 
-	[Tooltip("Is false, exact values are copied. If true, values are scaled based on LODGroup size, so the changeover point will match.")]
 	[SerializeField]
+	[Tooltip("Is false, exact values are copied. If true, values are scaled based on LODGroup size, so the changeover point will match.")]
 	private bool scale = true;
 
 	public bool CanCopy()
@@ -32306,9 +32306,9 @@ using UnityEngine.Serialization;
 public class DensitySpawnPopulation : SpawnPopulationBase
 {
 	[Header("Spawn Info")]
-	[FormerlySerializedAs("TargetDensity")]
-	[SerializeField]
 	[Tooltip("Usually per square km")]
+	[SerializeField]
+	[FormerlySerializedAs("TargetDensity")]
 	public float _targetDensity = 1f;
 
 	public int ClusterSizeMin = 1;

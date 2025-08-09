@@ -736,11 +736,11 @@ public readonly struct ServerInfo : IEquatable<ServerInfo>
 		BufferList<string> obj = new BufferList<string>();
 		obj.Add("event");
 		obj.Add("minigame");
+		obj.Add("battlefield");
 		obj.Add("builds");
 		obj.Add("training");
 		obj.Add("roleplay");
 		obj.Add("creative");
-		obj.Add("battlefield");
 		obj.Add("gmhardcore");
 		obj.Add("gmsoftcore");
 		obj.Add("gmprimitive");

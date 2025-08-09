@@ -9466,6 +9466,33 @@ public class Skin
 		((Texture)texture).filterMode = (FilterMode)((!trilinearFiltering) ? 1 : 2);
 	}
 
+	public IEnumerable<Texture2D> GetAllTextures()
+	{
+		if (TextureObjects != null)
+		{
+			foreach (Texture textureObject in TextureObjects)
+			{
+				Texture2D val = (Texture2D)(object)((textureObject is Texture2D) ? textureObject : null);
+				if (val != null)
+				{
+					yield return val;
+				}
+			}
+		}
+		if (TextureAssets == null)
+		{
+			yield break;
+		}
+		foreach (Texture textureAsset in TextureAssets)
+		{
+			Texture2D val2 = (Texture2D)(object)((textureAsset is Texture2D) ? textureAsset : null);
+			if (val2 != null)
+			{
+				yield return val2;
+			}
+		}
+	}
+
 	internal void Apply(GameObject gameObject)
 	{
 		Apply(gameObject, Skinnable, Materials);

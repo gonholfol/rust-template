@@ -2163,10 +2163,10 @@ public enum FishingTag
 
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
+[ExecuteInEditMode]
 [RequireComponent(typeof(CommandBufferManager))]
 [RequireComponent(typeof(PostOpaqueDepth))]
-[ExecuteInEditMode]
+[RequireComponent(typeof(Camera))]
 public class WaterCamera : MonoBehaviour
 {
 }
@@ -3759,8 +3759,8 @@ public struct ScreenSpaceRefractionParams
 
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
 [RequireComponent(typeof(CommandBufferManager))]
+[RequireComponent(typeof(Camera))]
 [ExecuteInEditMode]
 public class DeferredExtension : MonoBehaviour
 {
@@ -3792,9 +3792,9 @@ public class DeferredExtensionMesh : MonoBehaviour
 
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
-[RequireComponent(typeof(CommandBufferManager))]
 [ExecuteInEditMode]
+[RequireComponent(typeof(CommandBufferManager))]
+[RequireComponent(typeof(Camera))]
 public class DeferredIndirectLightingPass : MonoBehaviour
 {
 }
@@ -4228,8 +4228,8 @@ private struct SubsurfaceProfileEntry
 
 using UnityEngine;
 
-[RequireComponent(typeof(Renderer))]
 [ExecuteInEditMode]
+[RequireComponent(typeof(Renderer))]
 public class DeferredMeshDecal : MonoBehaviour, IClientComponent
 {
 }
@@ -4515,9 +4515,9 @@ public class FoliageDisplacementManager : SingletonComponent<FoliageDisplacement
 
 using UnityEngine;
 
-[RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 [ExecuteInEditMode]
+[RequireComponent(typeof(MeshFilter))]
 public class Impostor : MonoBehaviour, IClientComponent, IPrefabPreProcess
 {
 	public ImpostorAsset asset;
@@ -26142,8 +26142,8 @@ public class CardGameUI : UIDialog
 		void UpdateInGameUI_NoPlayer(CardGameUI ui);
 	}
 
-	[SerializeField]
 	[Header("Card Game")]
+	[SerializeField]
 	private InfoTextUI primaryInfo;
 
 	[SerializeField]
@@ -32271,8 +32271,8 @@ public class VehicleEditingPanel : LootPanel
 	[SerializeField]
 	private float disabledAlpha = 0.25f;
 
-	[SerializeField]
 	[Header("Edit Vehicle")]
+	[SerializeField]
 	private CanvasGroup editGroup;
 
 	[SerializeField]
@@ -32383,8 +32383,8 @@ public class VehicleEditingPanel : LootPanel
 	[SerializeField]
 	private Phrase phraseEmptyStorage;
 
-	[SerializeField]
 	[Header("Create Chassis")]
+	[SerializeField]
 	private CreateChassisEntry[] chassisOptions;
 }
 

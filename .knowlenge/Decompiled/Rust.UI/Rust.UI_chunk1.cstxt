@@ -2591,19 +2591,17 @@ public class RustButton : RustControl, IPointerDownHandler, IEventSystemHandler,
 
 	public void CalculateLayoutInputHorizontal()
 	{
-		RustText text = Text;
-		if (text != null)
+		if ((Object)(object)Text != (Object)null)
 		{
-			((TextMeshProUGUI)text).CalculateLayoutInputHorizontal();
+			((TextMeshProUGUI)Text).CalculateLayoutInputHorizontal();
 		}
 	}
 
 	public void CalculateLayoutInputVertical()
 	{
-		RustText text = Text;
-		if (text != null)
+		if ((Object)(object)Text != (Object)null)
 		{
-			((TextMeshProUGUI)text).CalculateLayoutInputVertical();
+			((TextMeshProUGUI)Text).CalculateLayoutInputVertical();
 		}
 	}
 }
