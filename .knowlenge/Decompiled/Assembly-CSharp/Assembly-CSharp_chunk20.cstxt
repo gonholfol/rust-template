@@ -17,9 +17,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using VLB;
 
-[HelpURL("http://saladgamer.com/vlb-doc/comp-lightbeam/")]
-[AddComponentMenu("")]
 [ExecuteInEditMode]
+[AddComponentMenu("")]
+[HelpURL("http://saladgamer.com/vlb-doc/comp-lightbeam/")]
 public class BeamGeometry : MonoBehaviour
 {
 	private VolumetricLightBeam m_Master;
@@ -352,14 +352,14 @@ public class Config : ScriptableObject
 
 	public bool forceSinglePass;
 
-	[HighlightNull]
 	[SerializeField]
+	[HighlightNull]
 	private Shader beamShader1Pass;
 
-	[HighlightNull]
-	[FormerlySerializedAs("beamShader")]
 	[FormerlySerializedAs("BeamShader")]
+	[HighlightNull]
 	[SerializeField]
+	[FormerlySerializedAs("beamShader")]
 	private Shader beamShader2Pass;
 
 	public int sharedMeshSides = 24;
@@ -607,10 +607,10 @@ using System;
 using UnityEngine;
 using VLB;
 
+[HelpURL("http://saladgamer.com/vlb-doc/comp-dynocclusion/")]
 [RequireComponent(typeof(VolumetricLightBeam))]
 [DisallowMultipleComponent]
 [ExecuteInEditMode]
-[HelpURL("http://saladgamer.com/vlb-doc/comp-dynocclusion/")]
 public class DynamicOcclusion : MonoBehaviour
 {
 	private enum Direction
@@ -1280,9 +1280,9 @@ public static class Noise3D
 using UnityEngine;
 using VLB;
 
-[DisallowMultipleComponent]
 [HelpURL("http://saladgamer.com/vlb-doc/comp-triggerzone/")]
 [RequireComponent(typeof(VolumetricLightBeam))]
+[DisallowMultipleComponent]
 public class TriggerZone : MonoBehaviour
 {
 	public bool setIsTrigger = true;
@@ -1623,10 +1623,10 @@ using System;
 using UnityEngine;
 using VLB;
 
-[HelpURL("http://saladgamer.com/vlb-doc/comp-dustparticles/")]
-[DisallowMultipleComponent]
 [ExecuteInEditMode]
+[HelpURL("http://saladgamer.com/vlb-doc/comp-dustparticles/")]
 [RequireComponent(typeof(VolumetricLightBeam))]
+[DisallowMultipleComponent]
 public class VolumetricDustParticles : MonoBehaviour
 {
 	public enum Direction
@@ -1920,10 +1920,10 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using VLB;
 
-[DisallowMultipleComponent]
+[ExecuteInEditMode]
 [SelectionBase]
 [HelpURL("http://saladgamer.com/vlb-doc/comp-lightbeam/")]
-[ExecuteInEditMode]
+[DisallowMultipleComponent]
 public class VolumetricLightBeam : MonoBehaviour
 {
 	public bool colorFromLight = true;
@@ -2012,8 +2012,8 @@ public class VolumetricLightBeam : MonoBehaviour
 	[SerializeField]
 	private int pluginVersion = -1;
 
-	[FormerlySerializedAs("trackChangesDuringPlaytime")]
 	[SerializeField]
+	[FormerlySerializedAs("trackChangesDuringPlaytime")]
 	private bool _TrackChangesDuringPlaytime;
 
 	[SerializeField]
@@ -2560,8 +2560,8 @@ using Smaa;
 using UnityEngine;
 
 [ExecuteInEditMode]
-[RequireComponent(typeof(Camera))]
 [AddComponentMenu("Image Effects/Subpixel Morphological Antialiasing")]
+[RequireComponent(typeof(Camera))]
 public class SMAA : MonoBehaviour
 {
 	public DebugPass DebugPass;
@@ -4980,6 +4980,31 @@ public struct FillJob<T> : IJob where T : unmanaged
 
 using Unity.Burst;
 using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.Jobs;
+
+[BurstCompile]
+public struct FillJobUnsafe<T> : IJob where T : unmanaged
+{
+	[WriteOnly]
+	public NativeArray<T> Values;
+
+	[NativeDisableUnsafePtrRestriction]
+	[ReadOnly]
+	public T Value;
+
+	public void Execute()
+	{
+		for (int i = 0; i < Values.Length; i++)
+		{
+			Values[i] = Value;
+		}
+	}
+}
+
+
+using Unity.Burst;
+using Unity.Collections;
 using Unity.Jobs;
 
 [BurstCompile]
@@ -7019,7 +7044,8 @@ public static class Server
 
 	private static void SetServerId(string serverId)
 	{
-		Command obj = Server.Find("app.serverid");
+		//IL_0005: Unknown result type (might be due to invalid IL or missing references)
+		Command obj = Server.Find(StringView.op_Implicit("app.serverid"));
 		if (obj != null)
 		{
 			obj.Set(serverId ?? "");
@@ -10782,8 +10808,8 @@ using UnityEngine;
 [BurstCompile]
 public struct TransformStartEndTicksJob : IJobFor
 {
-	[NativeDisableParallelForRestriction]
 	[WriteOnly]
+	[NativeDisableParallelForRestriction]
 	public NativeArray<Vector3> Starts;
 
 	[NativeDisableParallelForRestriction]
@@ -15348,8 +15374,8 @@ internal struct SmallDisplacementPlaneTraceJob : IJobParallelForDefer
 	[WriteOnly]
 	public NativeArray<bool> HitResults;
 
-	[WriteOnly]
 	[NativeDisableParallelForRestriction]
+	[WriteOnly]
 	public NativeArray<Vector3> HitPositions;
 
 	public void Execute(int indicesIndex)
@@ -15407,8 +15433,8 @@ internal struct OceanTraceJob : IJobParallelForDefer
 
 	public ReadOnly<float> MaxDists;
 
-	[WriteOnly]
 	[NativeDisableParallelForRestriction]
+	[WriteOnly]
 	public NativeArray<bool> HitResults;
 
 	[NativeDisableParallelForRestriction]
@@ -16470,8 +16496,8 @@ internal struct RefillOceanJob : IJobParallelFor
 
 	public ReadOnly<float> HeightMap;
 
-	[WriteOnly]
 	[NativeDisableParallelForRestriction]
+	[WriteOnly]
 	public NativeArray<float> WaterMap;
 
 	public float OceanLevel;
@@ -17694,8 +17720,8 @@ public struct CheckBoundsJobIndirect : IJob
 	[WriteOnly]
 	public NativeList<int> OverlapIndices;
 
-	[NativeDisableContainerSafetyRestriction]
 	[ReadOnly]
+	[NativeDisableContainerSafetyRestriction]
 	public CoarseQueryGrid Grid;
 
 	[ReadOnly]
@@ -19195,34 +19221,34 @@ public class TonemappingColorGrading : MonoBehaviour
 	[Serializable]
 	public struct BasicsSettings
 	{
-		[Tooltip("Sets the white balance to a custom color temperature.")]
 		[Range(-2f, 2f)]
+		[Tooltip("Sets the white balance to a custom color temperature.")]
 		public float temperatureShift;
 
 		[Range(-2f, 2f)]
 		[Tooltip("Sets the white balance to compensate for a green or magenta tint.")]
 		public float tint;
 
+		[Tooltip("Shift the hue of all colors.")]
 		[Range(-0.5f, 0.5f)]
 		[Space]
-		[Tooltip("Shift the hue of all colors.")]
 		public float hue;
 
-		[Tooltip("Pushes the intensity of all colors.")]
 		[Range(0f, 2f)]
+		[Tooltip("Pushes the intensity of all colors.")]
 		public float saturation;
 
-		[Tooltip("Adjusts the saturation so that clipping is minimized as colors approach full saturation.")]
 		[Range(-1f, 1f)]
+		[Tooltip("Adjusts the saturation so that clipping is minimized as colors approach full saturation.")]
 		public float vibrance;
 
-		[Range(0f, 10f)]
 		[Tooltip("Brightens or darkens all colors.")]
+		[Range(0f, 10f)]
 		public float value;
 
-		[Tooltip("Expands or shrinks the overall range of tonal values.")]
-		[Range(0f, 2f)]
 		[Space]
+		[Range(0f, 2f)]
+		[Tooltip("Expands or shrinks the overall range of tonal values.")]
 		public float contrast;
 
 		[Range(0.01f, 5f)]
@@ -19339,16 +19365,16 @@ public class TonemappingColorGrading : MonoBehaviour
 		[IndentedGroup]
 		public BasicsSettings basics;
 
-		[ChannelMixer]
 		[Space]
+		[ChannelMixer]
 		public ChannelMixerSettings channelMixer;
 
-		[IndentedGroup]
 		[Space]
+		[IndentedGroup]
 		public CurvesSettings curves;
 
-		[Tooltip("Use dithering to try and minimize color banding in dark areas.")]
 		[Space]
+		[Tooltip("Use dithering to try and minimize color banding in dark areas.")]
 		public bool useDithering;
 
 		[Tooltip("Displays the generated LUT in the top left corner of the GameView.")]
@@ -19377,16 +19403,16 @@ public class TonemappingColorGrading : MonoBehaviour
 		}
 	}
 
-	[SettingsGroup]
 	[SerializeField]
+	[SettingsGroup]
 	private EyeAdaptationSettings m_EyeAdaptation = EyeAdaptationSettings.defaultSettings;
 
-	[SettingsGroup]
 	[SerializeField]
+	[SettingsGroup]
 	private TonemappingSettings m_Tonemapping = TonemappingSettings.defaultSettings;
 
-	[SettingsGroup]
 	[SerializeField]
+	[SettingsGroup]
 	private ColorGradingSettings m_ColorGrading = ColorGradingSettings.defaultSettings;
 
 	[SettingsGroup]
@@ -19644,34 +19670,34 @@ using UnityEngine;
 [Serializable]
 public struct BasicsSettings
 {
-	[Tooltip("Sets the white balance to a custom color temperature.")]
 	[Range(-2f, 2f)]
+	[Tooltip("Sets the white balance to a custom color temperature.")]
 	public float temperatureShift;
 
 	[Range(-2f, 2f)]
 	[Tooltip("Sets the white balance to compensate for a green or magenta tint.")]
 	public float tint;
 
+	[Tooltip("Shift the hue of all colors.")]
 	[Range(-0.5f, 0.5f)]
 	[Space]
-	[Tooltip("Shift the hue of all colors.")]
 	public float hue;
 
-	[Tooltip("Pushes the intensity of all colors.")]
 	[Range(0f, 2f)]
+	[Tooltip("Pushes the intensity of all colors.")]
 	public float saturation;
 
-	[Tooltip("Adjusts the saturation so that clipping is minimized as colors approach full saturation.")]
 	[Range(-1f, 1f)]
+	[Tooltip("Adjusts the saturation so that clipping is minimized as colors approach full saturation.")]
 	public float vibrance;
 
-	[Range(0f, 10f)]
 	[Tooltip("Brightens or darkens all colors.")]
+	[Range(0f, 10f)]
 	public float value;
 
-	[Tooltip("Expands or shrinks the overall range of tonal values.")]
-	[Range(0f, 2f)]
 	[Space]
+	[Range(0f, 2f)]
+	[Tooltip("Expands or shrinks the overall range of tonal values.")]
 	public float contrast;
 
 	[Range(0.01f, 5f)]
@@ -19801,16 +19827,16 @@ public struct ColorGradingSettings
 	[IndentedGroup]
 	public BasicsSettings basics;
 
-	[ChannelMixer]
 	[Space]
+	[ChannelMixer]
 	public ChannelMixerSettings channelMixer;
 
-	[IndentedGroup]
 	[Space]
+	[IndentedGroup]
 	public CurvesSettings curves;
 
-	[Tooltip("Use dithering to try and minimize color banding in dark areas.")]
 	[Space]
+	[Tooltip("Use dithering to try and minimize color banding in dark areas.")]
 	public bool useDithering;
 
 	[Tooltip("Displays the generated LUT in the top left corner of the GameView.")]
@@ -19843,8 +19869,8 @@ public struct ColorGradingSettings
 using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 
-[ExecuteInEditMode]
 [AddComponentMenu("Image Effects/Other/Scope Overlay")]
+[ExecuteInEditMode]
 public class ScopeEffect : PostEffectsBase, IImageEffect
 {
 	public Material overlayMaterial;
@@ -19886,9 +19912,9 @@ using WaterLevelJobs;
 public static class WaterLevelBurst
 {
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	internal delegate void GetBuoyancyWaterInfoBatched_00007AB9$PostfixBurstDelegate(in NativeArray<Vector3> allPositions, in NativeArray<Vector2> allUVPositions, in NativeArray<float> pointTerrainHeightNativeArray, in NativeArray<float> pointWaterHeightNativeArray, in NativeArray<bool> doDeepWaterChecksStateNativeArray, ref NativeArray<WaterLevel.WaterInfo> pointWaterInfoNativeArray, in NativeArray<int> instancePointCountNativeArray, in int instanceCount, in TerrainTopologyMap.TopologyQueryStructure topologyMap, in NativeArray<bool> waterIgnoreStates, ref NativeArray<bool> needsDeepWaterChecks, bool isDeepSea, out bool hasAnyDeepWaterChecks);
+	internal delegate void GetBuoyancyWaterInfoBatched_00007B94$PostfixBurstDelegate(in NativeArray<Vector3> allPositions, in NativeArray<Vector2> allUVPositions, in NativeArray<float> pointTerrainHeightNativeArray, in NativeArray<float> pointWaterHeightNativeArray, in NativeArray<bool> doDeepWaterChecksStateNativeArray, ref NativeArray<WaterLevel.WaterInfo> pointWaterInfoNativeArray, in NativeArray<int> instancePointCountNativeArray, in int instanceCount, in TerrainTopologyMap.TopologyQueryStructure topologyMap, in NativeArray<bool> waterIgnoreStates, ref NativeArray<bool> needsDeepWaterChecks, bool isDeepSea, out bool hasAnyDeepWaterChecks);
 
-	internal static class GetBuoyancyWaterInfoBatched_00007AB9$BurstDirectCall
+	internal static class GetBuoyancyWaterInfoBatched_00007B94$BurstDirectCall
 	{
 		private static IntPtr Pointer;
 
@@ -19899,7 +19925,7 @@ public static class WaterLevelBurst
 			//IL_001b: Unknown result type (might be due to invalid IL or missing references)
 			if (Pointer == (IntPtr)0)
 			{
-				Pointer = BurstCompiler.CompileFunctionPointer<GetBuoyancyWaterInfoBatched_00007AB9$PostfixBurstDelegate>((GetBuoyancyWaterInfoBatched_00007AB9$PostfixBurstDelegate)GetBuoyancyWaterInfoBatched).Value;
+				Pointer = BurstCompiler.CompileFunctionPointer<GetBuoyancyWaterInfoBatched_00007B94$PostfixBurstDelegate>((GetBuoyancyWaterInfoBatched_00007B94$PostfixBurstDelegate)GetBuoyancyWaterInfoBatched).Value;
 			}
 			P_0 = Pointer;
 		}
@@ -19927,9 +19953,9 @@ public static class WaterLevelBurst
 	}
 
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	internal delegate void ConstructDeepWaterCommands_00007ABA$PostfixBurstDelegate(in NativeArray<Vector3> allPositions, in NativeArray<WaterLevel.WaterInfo> pointWaterInfoNativeArray, in NativeArray<bool> needsDeepWaterChecks, out NativeList<RaycastCommand> deepWaterCasts, out NativeList<int> raycastPointIndices, Allocator allocator);
+	internal delegate void ConstructDeepWaterCommands_00007B95$PostfixBurstDelegate(in NativeArray<Vector3> allPositions, in NativeArray<WaterLevel.WaterInfo> pointWaterInfoNativeArray, in NativeArray<bool> needsDeepWaterChecks, out NativeList<RaycastCommand> deepWaterCasts, out NativeList<int> raycastPointIndices, Allocator allocator);
 
-	internal static class ConstructDeepWaterCommands_00007ABA$BurstDirectCall
+	internal static class ConstructDeepWaterCommands_00007B95$BurstDirectCall
 	{
 		private static IntPtr Pointer;
 
@@ -19940,7 +19966,7 @@ public static class WaterLevelBurst
 			//IL_001b: Unknown result type (might be due to invalid IL or missing references)
 			if (Pointer == (IntPtr)0)
 			{
-				Pointer = BurstCompiler.CompileFunctionPointer<ConstructDeepWaterCommands_00007ABA$PostfixBurstDelegate>((ConstructDeepWaterCommands_00007ABA$PostfixBurstDelegate)ConstructDeepWaterCommands).Value;
+				Pointer = BurstCompiler.CompileFunctionPointer<ConstructDeepWaterCommands_00007B95$PostfixBurstDelegate>((ConstructDeepWaterCommands_00007B95$PostfixBurstDelegate)ConstructDeepWaterCommands).Value;
 			}
 			P_0 = Pointer;
 		}
@@ -19969,19 +19995,19 @@ public static class WaterLevelBurst
 		}
 	}
 
-	[MonoPInvokeCallback(typeof(WaterLevelJobs.GetBuoyancyWaterInfoBatched_00007AB9$PostfixBurstDelegate))]
+	[MonoPInvokeCallback(typeof(WaterLevelJobs.GetBuoyancyWaterInfoBatched_00007B94$PostfixBurstDelegate))]
 	[BurstCompile]
 	public static void GetBuoyancyWaterInfoBatched(in NativeArray<Vector3> allPositions, in NativeArray<Vector2> allUVPositions, in NativeArray<float> pointTerrainHeightNativeArray, in NativeArray<float> pointWaterHeightNativeArray, in NativeArray<bool> doDeepWaterChecksStateNativeArray, ref NativeArray<WaterLevel.WaterInfo> pointWaterInfoNativeArray, in NativeArray<int> instancePointCountNativeArray, in int instanceCount, in TerrainTopologyMap.TopologyQueryStructure topologyMap, in NativeArray<bool> waterIgnoreStates, ref NativeArray<bool> needsDeepWaterChecks, bool isDeepSea, out bool hasAnyDeepWaterChecks)
 	{
-		GetBuoyancyWaterInfoBatched_00007AB9$BurstDirectCall.Invoke(in allPositions, in allUVPositions, in pointTerrainHeightNativeArray, in pointWaterHeightNativeArray, in doDeepWaterChecksStateNativeArray, ref pointWaterInfoNativeArray, in instancePointCountNativeArray, in instanceCount, in topologyMap, in waterIgnoreStates, ref needsDeepWaterChecks, isDeepSea, out hasAnyDeepWaterChecks);
+		GetBuoyancyWaterInfoBatched_00007B94$BurstDirectCall.Invoke(in allPositions, in allUVPositions, in pointTerrainHeightNativeArray, in pointWaterHeightNativeArray, in doDeepWaterChecksStateNativeArray, ref pointWaterInfoNativeArray, in instancePointCountNativeArray, in instanceCount, in topologyMap, in waterIgnoreStates, ref needsDeepWaterChecks, isDeepSea, out hasAnyDeepWaterChecks);
 	}
 
 	[BurstCompile]
-	[MonoPInvokeCallback(typeof(WaterLevelJobs.ConstructDeepWaterCommands_00007ABA$PostfixBurstDelegate))]
+	[MonoPInvokeCallback(typeof(WaterLevelJobs.ConstructDeepWaterCommands_00007B95$PostfixBurstDelegate))]
 	public static void ConstructDeepWaterCommands(in NativeArray<Vector3> allPositions, in NativeArray<WaterLevel.WaterInfo> pointWaterInfoNativeArray, in NativeArray<bool> needsDeepWaterChecks, out NativeList<RaycastCommand> deepWaterCasts, out NativeList<int> raycastPointIndices, Allocator allocator)
 	{
 		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
-		ConstructDeepWaterCommands_00007ABA$BurstDirectCall.Invoke(in allPositions, in pointWaterInfoNativeArray, in needsDeepWaterChecks, out deepWaterCasts, out raycastPointIndices, allocator);
+		ConstructDeepWaterCommands_00007B95$BurstDirectCall.Invoke(in allPositions, in pointWaterInfoNativeArray, in needsDeepWaterChecks, out deepWaterCasts, out raycastPointIndices, allocator);
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -20113,7 +20139,7 @@ using Unity.Collections;
 using UnityEngine;
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-internal delegate void GetBuoyancyWaterInfoBatched_00007AB9$PostfixBurstDelegate(in NativeArray<Vector3> allPositions, in NativeArray<Vector2> allUVPositions, in NativeArray<float> pointTerrainHeightNativeArray, in NativeArray<float> pointWaterHeightNativeArray, in NativeArray<bool> doDeepWaterChecksStateNativeArray, ref NativeArray<WaterLevel.WaterInfo> pointWaterInfoNativeArray, in NativeArray<int> instancePointCountNativeArray, in int instanceCount, in TerrainTopologyMap.TopologyQueryStructure topologyMap, in NativeArray<bool> waterIgnoreStates, ref NativeArray<bool> needsDeepWaterChecks, bool isDeepSea, out bool hasAnyDeepWaterChecks);
+internal delegate void GetBuoyancyWaterInfoBatched_00007B94$PostfixBurstDelegate(in NativeArray<Vector3> allPositions, in NativeArray<Vector2> allUVPositions, in NativeArray<float> pointTerrainHeightNativeArray, in NativeArray<float> pointWaterHeightNativeArray, in NativeArray<bool> doDeepWaterChecksStateNativeArray, ref NativeArray<WaterLevel.WaterInfo> pointWaterInfoNativeArray, in NativeArray<int> instancePointCountNativeArray, in int instanceCount, in TerrainTopologyMap.TopologyQueryStructure topologyMap, in NativeArray<bool> waterIgnoreStates, ref NativeArray<bool> needsDeepWaterChecks, bool isDeepSea, out bool hasAnyDeepWaterChecks);
 
 
 using System;
@@ -20121,7 +20147,7 @@ using Unity.Burst;
 using Unity.Collections;
 using UnityEngine;
 
-internal static class GetBuoyancyWaterInfoBatched_00007AB9$BurstDirectCall
+internal static class GetBuoyancyWaterInfoBatched_00007B94$BurstDirectCall
 {
 	private static IntPtr Pointer;
 
@@ -20132,7 +20158,7 @@ internal static class GetBuoyancyWaterInfoBatched_00007AB9$BurstDirectCall
 		//IL_001b: Unknown result type (might be due to invalid IL or missing references)
 		if (Pointer == (IntPtr)0)
 		{
-			Pointer = BurstCompiler.CompileFunctionPointer<GetBuoyancyWaterInfoBatched_00007AB9$PostfixBurstDelegate>((GetBuoyancyWaterInfoBatched_00007AB9$PostfixBurstDelegate)GetBuoyancyWaterInfoBatched).Value;
+			Pointer = BurstCompiler.CompileFunctionPointer<GetBuoyancyWaterInfoBatched_00007B94$PostfixBurstDelegate>((GetBuoyancyWaterInfoBatched_00007B94$PostfixBurstDelegate)GetBuoyancyWaterInfoBatched).Value;
 		}
 		P_0 = Pointer;
 	}
@@ -20165,7 +20191,7 @@ using Unity.Collections;
 using UnityEngine;
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-internal delegate void ConstructDeepWaterCommands_00007ABA$PostfixBurstDelegate(in NativeArray<Vector3> allPositions, in NativeArray<WaterLevel.WaterInfo> pointWaterInfoNativeArray, in NativeArray<bool> needsDeepWaterChecks, out NativeList<RaycastCommand> deepWaterCasts, out NativeList<int> raycastPointIndices, Allocator allocator);
+internal delegate void ConstructDeepWaterCommands_00007B95$PostfixBurstDelegate(in NativeArray<Vector3> allPositions, in NativeArray<WaterLevel.WaterInfo> pointWaterInfoNativeArray, in NativeArray<bool> needsDeepWaterChecks, out NativeList<RaycastCommand> deepWaterCasts, out NativeList<int> raycastPointIndices, Allocator allocator);
 
 
 using System;
@@ -20173,7 +20199,7 @@ using Unity.Burst;
 using Unity.Collections;
 using UnityEngine;
 
-internal static class ConstructDeepWaterCommands_00007ABA$BurstDirectCall
+internal static class ConstructDeepWaterCommands_00007B95$BurstDirectCall
 {
 	private static IntPtr Pointer;
 
@@ -20184,7 +20210,7 @@ internal static class ConstructDeepWaterCommands_00007ABA$BurstDirectCall
 		//IL_001b: Unknown result type (might be due to invalid IL or missing references)
 		if (Pointer == (IntPtr)0)
 		{
-			Pointer = BurstCompiler.CompileFunctionPointer<ConstructDeepWaterCommands_00007ABA$PostfixBurstDelegate>((ConstructDeepWaterCommands_00007ABA$PostfixBurstDelegate)ConstructDeepWaterCommands).Value;
+			Pointer = BurstCompiler.CompileFunctionPointer<ConstructDeepWaterCommands_00007B95$PostfixBurstDelegate>((ConstructDeepWaterCommands_00007B95$PostfixBurstDelegate)ConstructDeepWaterCommands).Value;
 		}
 		P_0 = Pointer;
 	}
@@ -20959,52 +20985,6 @@ public enum RPCProgressBarState
 }
 
 
-using System;
-using EntityIO.Electric;
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Rust/IO/Button Color Settings")]
-public class ButtonColorSettings : BaseScriptableObject
-{
-	[Serializable]
-	public struct Setting
-	{
-		public Color color;
-
-		public Phrase name;
-
-		public Phrase description;
-	}
-
-	[SerializeField]
-	private Setting[] colors;
-
-	public Setting GetSetting(int index)
-	{
-		return colors[Mathf.Clamp(index, 0, colors.Length - 1)];
-	}
-
-	public ReadOnlySpan<Setting> GetSettings()
-	{
-		return colors;
-	}
-}
-
-
-using System;
-using UnityEngine;
-
-[Serializable]
-public struct Setting
-{
-	public Color color;
-
-	public Phrase name;
-
-	public Phrase description;
-}
-
-
 using Sonar;
 using UnityEngine;
 
@@ -21525,6 +21505,13 @@ public class ConsoleInput
 			RedrawInputLine(clear: false);
 		}
 	}
+}
+
+
+using System;
+
+public class PoolAnalyzerNonCachingAttribute : Attribute
+{
 }
 
 
@@ -22334,7 +22321,7 @@ public static class GameObjectEx
 	public static BaseEntity ToBaseEntity(this Transform transform, bool allowDestroyed = false)
 	{
 		IEntity val = GetEntityFromRegistry(transform, allowDestroyed);
-		if (val == null && !((Component)transform).gameObject.activeInHierarchy)
+		if (val == null)
 		{
 			val = GetEntityFromComponent(transform);
 		}
@@ -23223,10 +23210,10 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[AddComponentMenu("UI/Scroll Rect Ex", 37)]
 [SelectionBase]
-[ExecuteInEditMode]
 [RequireComponent(typeof(RectTransform))]
+[AddComponentMenu("UI/Scroll Rect Ex", 37)]
+[ExecuteInEditMode]
 public class ScrollRectEx : UIBehaviour, IInitializePotentialDragHandler, IEventSystemHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IScrollHandler, ICanvasElement, ILayoutGroup, ILayoutController
 {
 	public enum MovementType
@@ -24862,16 +24849,16 @@ public class UICircle : UIPrimitiveBase
 	[Tooltip("The Arc property is a percentage of the entire circumference of the circle.")]
 	public float Arc = 1f;
 
-	[Range(0f, 1000f)]
 	[Tooltip("The Arc Steps property defines the number of segments that the Arc will be divided into.")]
+	[Range(0f, 1000f)]
 	public int ArcSteps = 100;
 
 	[Tooltip("The Arc Rotation property permits adjusting the geometry orientation around the Z axis.")]
 	[Range(0f, 360f)]
 	public int ArcRotation;
 
-	[Tooltip("The Progress property allows the primitive to be used as a progression indicator.")]
 	[Range(0f, 1f)]
+	[Tooltip("The Progress property allows the primitive to be used as a progression indicator.")]
 	public float Progress;
 
 	private float _progress;
@@ -25387,8 +25374,8 @@ public class UICornerCut : UIPrimitiveBase
 	[SerializeField]
 	private bool m_cutLR;
 
-	[SerializeField]
 	[Tooltip("Up-Down colors become Left-Right colors")]
+	[SerializeField]
 	private bool m_makeColumns;
 
 	[SerializeField]
@@ -26051,8 +26038,8 @@ using UnityEngine.Sprites;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 
-[AddComponentMenu("UI/Extensions/Primitives/UILineRenderer")]
 [RequireComponent(typeof(RectTransform))]
+[AddComponentMenu("UI/Extensions/Primitives/UILineRenderer")]
 public class UILineRenderer : UIPrimitiveBase
 {
 	private enum SegmentType
@@ -26110,24 +26097,24 @@ public class UILineRenderer : UIPrimitiveBase
 	[Tooltip("Points to draw lines between\n Can be improved using the Resolution Option")]
 	internal Vector2[] m_points;
 
-	[SerializeField]
 	[Tooltip("Segments to be drawn\n This is a list of arrays of points")]
+	[SerializeField]
 	internal List<Vector2[]> m_segments;
 
-	[Tooltip("Thickness of the line")]
 	[SerializeField]
+	[Tooltip("Thickness of the line")]
 	internal float lineThickness = 2f;
 
 	[SerializeField]
 	[Tooltip("Use the relative bounds of the Rect Transform (0,0 -> 0,1) or screen space coordinates")]
 	internal bool relativeSize;
 
-	[Tooltip("Do the points identify a single line or split pairs of lines")]
 	[SerializeField]
+	[Tooltip("Do the points identify a single line or split pairs of lines")]
 	internal bool lineList;
 
-	[Tooltip("Add end caps to each line\nMultiple caps when used with Line List")]
 	[SerializeField]
+	[Tooltip("Add end caps to each line\nMultiple caps when used with Line List")]
 	internal bool lineCaps;
 
 	[Tooltip("Resolution of the Bezier curve, different to line Resolution")]
@@ -26864,8 +26851,8 @@ using UnityEngine.Sprites;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 
-[AddComponentMenu("UI/Extensions/Primitives/UILineRendererList")]
 [RequireComponent(typeof(RectTransform))]
+[AddComponentMenu("UI/Extensions/Primitives/UILineRendererList")]
 public class UILineRendererList : UIPrimitiveBase
 {
 	private enum SegmentType
@@ -26919,24 +26906,24 @@ public class UILineRendererList : UIPrimitiveBase
 
 	private static Vector2[] fullUvs;
 
-	[SerializeField]
 	[Tooltip("Points to draw lines between\n Can be improved using the Resolution Option")]
+	[SerializeField]
 	internal List<Vector2> m_points;
 
-	[SerializeField]
 	[Tooltip("Thickness of the line")]
+	[SerializeField]
 	internal float lineThickness = 2f;
 
-	[SerializeField]
 	[Tooltip("Use the relative bounds of the Rect Transform (0,0 -> 0,1) or screen space coordinates")]
+	[SerializeField]
 	internal bool relativeSize;
 
-	[SerializeField]
 	[Tooltip("Do the points identify a single line or split pairs of lines")]
+	[SerializeField]
 	internal bool lineList;
 
-	[Tooltip("Add end caps to each line\nMultiple caps when used with Line List")]
 	[SerializeField]
+	[Tooltip("Add end caps to each line\nMultiple caps when used with Line List")]
 	internal bool lineCaps;
 
 	[Tooltip("Resolution of the Bezier curve, different to line Resolution")]
